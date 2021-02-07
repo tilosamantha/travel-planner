@@ -1,0 +1,27 @@
+import React from 'react';
+import './stuff.css';
+
+const StuffList = ({list, removeItem, toggle, isExpanded, editItem}) => {
+  return (
+    <div className="list-body">
+      <h1 className="stuff-list-title">Things To Do</h1>
+      {list.map(function(item){
+        return (
+          <div key={item.title}>
+            <button className="list-title" onClick={() => {toggle()}}>{item.title}</button>
+            <div id={isExpanded? "details-showing": "details-hiding"}>
+              <p>{item.description}</p>
+              <a className="list-link" target="_blank" href={item.link}>{item.link}</a>
+              <br/>
+              <button className="list-btn" onClick={() => editItem(item)}>edit</button>
+              <button className="list-btn"
+              onClick={() => removeItem(item.title)}>remove</button>
+            </div>
+          </div>
+        )
+      })}
+    </div>
+  )
+}
+
+export default StuffList;

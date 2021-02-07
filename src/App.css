@@ -1,0 +1,53 @@
+@import url('https://fonts.googleapis.com/css2?family=Merriweather+Sans:wght@300&family=Montserrat:wght@200&family=Quicksand&family=Yusei+Magic&display=swap');
+
+
+.body {
+  background-color: rgb(236, 236, 237);
+  border-radius: 10px;
+  border: 2px solid rgb(83, 83, 83);
+  margin: 15px;
+  padding: 5px;
+}
+
+.main {
+  display: flex; 
+  flex-direction: row;
+}
+
+#header {
+  text-align: center;
+  padding: 20px;
+  margin: 15px;
+  background-color: rgb(245, 244, 240);
+  color: rgb(67, 66, 66);
+  border: 4px solid wheat;
+  border-radius: 10px;
+  font-size: 3em;
+}
+
+.focus {
+  padding: 30px;
+  margin: 25px;
+  margin-right: 20px;
+  border-radius: 15px;
+  width: 100%;
+  background-color: rgb(211, 183, 183);
+}
+
+.title {
+  margin-left: 30px;
+  font-weight: 900;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 2.5em;
+  border-bottom: 1px solid rgb(67, 66, 66);
+  padding-bottom: 7px;
+  padding-left: 15px;
+  max-width: 40%;
+}
+
+p {
+  margin: 20px 50px 20px 20px;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 1.5em;
+  font-weight: 800;
+}
