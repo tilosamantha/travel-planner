@@ -71,6 +71,7 @@ function Stuff() {
       <h2 className="title">While you're there... </h2>
       <div className="stuff-layout">
       <StuffList 
+        className="list-scroll"
         list={list}
         removeItem={removeItem}
         toggle={toggle}

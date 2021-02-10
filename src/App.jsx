@@ -5,6 +5,7 @@ import Routes from './routes';
 import Packing from './components/Packing/Packing';
 import Stuff from './components/stuff/Stuff';
 import Navbar from './components/navBar/navbar';
+import CalendarView from './components/Calendar';
 
 class App extends React.Component {
   render() {
@@ -14,7 +15,7 @@ class App extends React.Component {
           <h1 id="header">Eurotrip</h1>
           <div className="main">
             <Navbar />
-            <Stuff />
+            <CalendarView />
             {/* <Routes /> */}
           </div>
         </div>

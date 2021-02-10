@@ -12,7 +12,11 @@ function EditForm({updateItem, currentItem}){
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    if (item.title == "") {
+      alert("You can't NOT have a title!");
+    } else {
     updateItem(item.id, item);
+    }
   }
 
   return (

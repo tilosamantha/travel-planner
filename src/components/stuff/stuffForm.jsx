@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import './stuff.css';
 
 
@@ -19,14 +19,15 @@ function StuffForm({title, setTitle, onTitleChange, description, setDescription,
 
   const handleSubmit = (e) => {
     e.preventDefault();
-      //if no title, run error
+    if (!title) {
+       alert("You didn't enter anything!");
+    } else {
       const newStuff = {id: list.length +1 ,title: title, description: description, link: link};
       setList(list => [...list, newStuff]);
-      console.log(list);
       setTitle("");
       setLink("");
       setDescription("");
-  }
+    }}
 
   return (
     <div className="stuff-form-body">
