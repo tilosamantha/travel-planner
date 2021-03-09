@@ -1,4 +1,5 @@
 import React from 'react';
+import axios from 'axios';
 import './stuff.css';
 
 
@@ -19,16 +20,27 @@ function StuffForm({title, setTitle, onTitleChange, description, setDescription,
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (!title) {
-       alert("You didn't enter anything!");
-    } else {
-      const newStuff = {id: list.length +1 ,title: title, description: description, link: link};
-      setList(list => [...list, newStuff]);
-      setTitle("");
-      setLink("");
-      setDescription("");
-    }}
+    const newStuff = {title: title, description: description, link: link};
 
+    if (!title) {
+      alert("You didn't enter anything!");
+    } else {
+    axios.post('/stuff', {title, description, link})
+      .then((res) => {
+        console.log(res);
+        setList(list => [...list, newStuff]);
+        setTitle("");
+        setLink("");
+        setDescription("");
+        console.log(newStuff)
+      })
+      .catch((err) => {
+        console.log('post/adding error', err)
+      })
+    }
+  }
+
+    
   return (
     <div className="stuff-form-body">
     <form  onSubmit={handleSubmit}>
@@ -58,7 +70,7 @@ function StuffForm({title, setTitle, onTitleChange, description, setDescription,
         <textarea 
           className="stuff-input"
           type="text"
-          rows='10'
+          rows='8'
           value={description}
           onChange={handleDescription}  
          />
