@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import './stuff.css';
 
 
-function EditForm({updateItem, currentItem}){
+function EditForm({updateItem, currentItem, errorMessage, setErrorMessage}){
   const [item, setItem] = useState(currentItem)
 
   function handleChange(e) {
@@ -13,7 +13,7 @@ function EditForm({updateItem, currentItem}){
   const handleSubmit = (e) => {
     e.preventDefault();
     if (item.title == "") {
-      alert("You can't NOT have a title!");
+      setErrorMessage("You can't NOT have a title!");
     } else {
     updateItem(item.id, item);
     }
@@ -23,6 +23,7 @@ function EditForm({updateItem, currentItem}){
     <div className="stuff-form-body">
     <form  onSubmit={handleSubmit}>
       <h2 className="stuff-form-title">Edit {currentItem.title}</h2>
+      <h3 className="errorMessage">{errorMessage}</h3>
       <label className="stuff-form-label">
         Title: 
         <input 
