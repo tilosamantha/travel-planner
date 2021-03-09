@@ -1,7 +1,7 @@
 import React from 'react';
 
 import './App.css';
-import Routes from './routes';
+import Routes from './navRoutes';
 import Packing from './components/Packing/Packing';
 import Stuff from './components/stuff/Stuff';
 import Navbar from './components/navBar/navbar';
@@ -15,7 +15,7 @@ class App extends React.Component {
           <h1 id="header">Eurotrip</h1>
           <div className="main">
             <Navbar />
-            <CalendarView />
+            <Stuff />
             {/* <Routes /> */}
           </div>
         </div>
