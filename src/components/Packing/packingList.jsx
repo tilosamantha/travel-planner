@@ -1,10 +1,11 @@
 import React from 'react';
 import './packing.css';
 
-const PackingList = ({packingList}) => {
+const PackingList = ({packingList, toggle}) => {
   return (
     <div className="packing-body">
-      <h1 className="packing-list-title">packing list</h1>
+      <h1 className="packing-list-title">What to pack:</h1>
+      <button onClick={() => toggle()}>Edit</button>
       <div id="item-columns">
         {packingList.map(function(item, i){
           return (
