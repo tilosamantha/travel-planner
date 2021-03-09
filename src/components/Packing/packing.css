@@ -40,7 +40,7 @@
   border: 1px solid rgb(83, 83, 83);
   border-radius: 10px;
   outline: none;
-  margin: 4px;
+  margin: 5px;
   background-color: rgb(236, 236, 237);
   color:rgb(67, 66, 66);
   width: 70px;
@@ -73,8 +73,10 @@
   color: rgb(67, 66, 66);
   background-color: rgb(245, 244, 240);
   width: 90%;
+  max-height: 400px;
   margin-right: 20px;
   padding: 20px;
+  overflow: scroll;
 }
 
 .packing-check {
@@ -83,6 +85,8 @@
 
 #item-columns {
   column-count: 2;
+  max-width: 100%;
+  flex-wrap: wrap;
 }
 
 #item-columns h3 {
@@ -90,4 +94,11 @@
   font-family: 'Montserrat', sans-serif;
   display: inline-block;
   vertical-align: top;
+}
+
+.delete-btn {
+  margin-top: 20px;
+  margin-left: 10px;
+  padding: 2px;
+  width: 26px;
 }

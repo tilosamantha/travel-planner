@@ -97,7 +97,8 @@ textarea {
   width: 60%;
   margin-right: 20px;
   padding: 0 20px 20px 20px;
-  overflow-inline: scroll;
+  overflow: scroll;
+  max-height: 550px;
 }
 
 .list-title {
@@ -153,4 +154,11 @@ textarea {
   width: 70px;
   height: 40px;
   margin: 20px 5px 0 5px;
+}
+ 
+.errorMessage {
+color: rgb(201, 36, 36);
+font-size: 1em;
+font-weight: 800;
+font-family: 'Montserrat', sans-serif;
 }
