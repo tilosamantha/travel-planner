@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import '../../App.css';
 import './stuff.css';
 import StuffForm from './stuffForm';
 import StuffList from './stuffList';
 import EditForm from './editForm';
+import axios from 'axios';
 
 function Stuff() {
   const [isExpanded, setIsExpanded] = useState(false);
@@ -11,30 +12,28 @@ function Stuff() {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [link, setLink] = useState("");
-  const [list, setList] = useState([
-    {
-      id: 1,
-      title: "Paris Catacombs",
-      link: "https://www.catacombes.paris.fr/en",
-      description: "Underground ossuaries in Paris, France.",
-    },
-    {
-      id: 2,
-      title: "Big Ben",
-      link: "https://www.parliament.uk/about/living-heritage/building/palace/big-ben/",
-      description: "Big clock tower in London, England",
-    },
-    {
-      id: 3,
-      title: "St Peter's Basilica",
-      link: "https://www.britannica.com/topic/Saint-Peters-Basilica",
-      description: "Vatican city church built in 1626"
-    }
-  ]);
 
-  //editing
+  const [getListFromDatabase, setGetListFromDatabase] = useState(true);
+  
+  const [errorMessage, setErrorMessage] = useState("   ");
+  
   const [editing, setEditing] = useState(false);
+  
+  useEffect(() => {
+    if (getListFromDatabase) {
+      axios.get('/stuff')
+      .then((res) => { 
+        setList(res.data.rows)
+        setGetListFromDatabase(false)
+      })
+      .catch((err) => {
+        console.error("error in get request", err)
+      })
+    } 
+  }, [getListFromDatabase])
 
+  const [list, setList] = useState([]);
+  
   const [currentItem, setCurrentItem] = useState({
     id: "",
     title: "",
@@ -50,28 +49,52 @@ function Stuff() {
     console.log("editing:", editing)
   };
 
+  // const updateItem = (id, updatedItem) => {
+  //   axios.put('/stuff/:id', {id, title, description, link})
+  //     .then((res) => {
+  //       console.log(res)
+  //       setEditing(false)
+  //       setList(list.map(item => (item.id === id ? updatedItem: item)))
+  //     })
+  //     .catch((err) => {
+  //       console.log('cant update item', err)
+  //     })
+  // }
+
   const updateItem = (id, updatedItem) => {
     setEditing(false)
     setList(list.map(item => (item.id === id ? updatedItem: item)))
   }
+
+
+  const removeItem = (id) => {
+    axios.delete(`/stuff/${id}`)
+    .then((res) => {
+      console.log("---------HELLO-------");
+      setList(list.filter((item) => item.title !== title));
+      console.log(list)
+    })
+    .catch((err) => {
+      console.log('error deleting item', err)
+    })
+  } 
   
-  const removeItem = (title) => {
-    setList(list.filter((item) => item.title !== title))
-    console.log(list)
-  }
+  // const removeItem = (title) => {
+  //   setList(list.filter((item) => item.title !== title))
+  //   console.log(list)
+  // } 
   
   function toggle(title) {
     setIsExpanded(isExpanded == false ? true : false)
     console.log("is Expanded?", isExpanded)
   };
-
+ 
   
   return (
     <div className="focus">
       <h2 className="title">While you're there... </h2>
       <div className="stuff-layout">
       <StuffList 
-        className="list-scroll"
         list={list}
         removeItem={removeItem}
         toggle={toggle}
@@ -85,7 +108,10 @@ function Stuff() {
           link={link}
           currentItem={currentItem}
           updateItem={updateItem}
+          errorMessage={errorMessage}
+          setErrorMessage={setErrorMessage}
         />) : (
+
         <StuffForm
         title={title}
         setTitle={setTitle}
