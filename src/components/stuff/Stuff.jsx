@@ -49,8 +49,8 @@ function Stuff() {
     console.log("editing:", editing)
   };
 
-  // const updateItem = (id, updatedItem) => {
-  //   axios.put('/stuff/:id', {id, title, description, link})
+  // const updateItem = ( updatedItem, id) => {
+  //   axios.put(`/stuff/${id}`, {id, title, description, link})
   //     .then((res) => {
   //       console.log(res)
   //       setEditing(false)
@@ -67,8 +67,8 @@ function Stuff() {
   }
 
 
-  const removeItem = (id) => {
-    axios.delete(`/stuff/${id}`)
+  const removeItem = (title, id) => {
+    axios.delete(`/stuff/${id}`, {id})
     .then((res) => {
       console.log("---------HELLO-------");
       setList(list.filter((item) => item.title !== title));
@@ -78,11 +78,6 @@ function Stuff() {
       console.log('error deleting item', err)
     })
   } 
-  
-  // const removeItem = (title) => {
-  //   setList(list.filter((item) => item.title !== title))
-  //   console.log(list)
-  // } 
   
   function toggle(title) {
     setIsExpanded(isExpanded == false ? true : false)

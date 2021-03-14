@@ -9,7 +9,6 @@ app.use(express.json());
 
 app.use('/', express.static(__dirname + '/public'));
 
-// add new stuff
 app.post(('/stuff'), (req, res) => {
   const { title, link, description } = req.body;
   controllers.postStuff(title, link, description)
@@ -26,8 +25,7 @@ app.post(('/stuff'), (req, res) => {
 app.get(('/stuff'), (req, res) => {
   controllers.getAllStuff()
   .then((result) => {
-    res.json(result);
-    res.send("this is all my stuff")
+    return res.json(result);
   })
   .catch((err) => {
     console.log( 'error returning all stuff', err);
@@ -51,11 +49,11 @@ app.put(('/stuff/:id'), (req, res) => {
 })
 
 //delete stuff by id
-app.delete(('/stuff/:id'), (req, res) => {
+app.delete('/stuff/:id', (req, res) => {
   let id = req.params.id;
   controllers.deleteStuff(id)
   .then((result) => {
-    // res.json(result);
+    return res.json(result);
     res.send('listing has been deleted')
   })
   .catch((err) => {
@@ -64,15 +62,6 @@ app.delete(('/stuff/:id'), (req, res) => {
   })
 })
 
-// const deleteStuff = (id) => {
-//   return client.query(`DELETE FROM stuff WHERE stuff_id=${id}`)
-//   .then((result) => {
-//     return result;
-//   })
-//   .catch((err) => {
-//     console.log('deleteStuff', err)
-//   })
-// }
 
 app.get('*', (req, res) => {
   res.sendFile(Path.join(__dirname, '../public/index.html'));

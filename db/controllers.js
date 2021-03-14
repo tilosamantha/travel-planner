@@ -40,7 +40,7 @@ const deleteStuff = (id) => {
     return result;
   })
   .catch((err) => {
-    console.log('deleteStuff', err)
+    console.log('------------- controllers.deleteStuff error ------------', err);
   })
 }
 
