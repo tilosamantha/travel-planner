@@ -21,7 +21,6 @@ app.post(('/stuff'), (req, res) => {
   })
 })
 
-// get all stuff
 app.get(('/stuff'), (req, res) => {
   controllers.getAllStuff()
   .then((result) => {
@@ -33,13 +32,11 @@ app.get(('/stuff'), (req, res) => {
   })
 })
 
-//edit stuff by id
-app.put(('/stuff/:id'), (req, res) => {
-  const { title, link, description } = req.body;
-  let id = req.params.id;
+app.put('/stuff/:id', (req, res) => {
+  const { id, title, link, description } = req.body;
   controllers.editStuff(id, title, link, description)
   .then((result) => {
-    res.json(result);
+    return res.json(result);
     res.send("listing has been edited successfully")
   })
   .catch((err) => {
@@ -48,13 +45,11 @@ app.put(('/stuff/:id'), (req, res) => {
   })
 })
 
-//delete stuff by id
 app.delete('/stuff/:id', (req, res) => {
   let id = req.params.id;
   controllers.deleteStuff(id)
   .then((result) => {
     return res.json(result);
-    res.send('listing has been deleted')
   })
   .catch((err) => {
     console.log( 'error deleting item', err);

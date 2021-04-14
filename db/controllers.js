@@ -30,9 +30,10 @@ const editStuff = (id, title, link, description) => {
     return result;
   })
   .catch((err) => {
-    console.log('editStuff', err);
+    console.log('-------- controller editStuff--------', err);
   })
 }
+
 
 const deleteStuff = (id) => {
   return client.query(`DELETE FROM stuff WHERE stuff_id=${id}`)

@@ -15,7 +15,7 @@ function EditForm({updateItem, currentItem}){
     if (item.title == "") {
       alert("You can't NOT have a title!");
     } else {
-    updateItem(item.id, item);
+    updateItem(item, currentItem.id);
     }
   }
 

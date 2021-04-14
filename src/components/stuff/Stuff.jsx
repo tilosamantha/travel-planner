@@ -42,37 +42,38 @@ function Stuff() {
   });
 
 
-  const editItem = (item) => {
-    console.log("current item:", item);
+  const editItem = (item, id) => {
+    console.log("current item:", item.title);
     setEditing(true);
-    setCurrentItem({id: item.id, title: item.title, description: item.description, link: item.link})
-    console.log("editing:", editing)
+    setCurrentItem({id: id, title: item.title, description: item.description, link: item.link})
+    console.log("curret id:", id);
   };
 
-  // const updateItem = ( updatedItem, id) => {
-  //   axios.put(`/stuff/${id}`, {id, title, description, link})
-  //     .then((res) => {
-  //       console.log(res)
-  //       setEditing(false)
-  //       setList(list.map(item => (item.id === id ? updatedItem: item)))
-  //     })
-  //     .catch((err) => {
-  //       console.log('cant update item', err)
-  //     })
-  // }
-
-  const updateItem = (id, updatedItem) => {
-    setEditing(false)
-    setList(list.map(item => (item.id === id ? updatedItem: item)))
+  const updateItem = (updatedItem, id) => {
+    let {title, link, description} = updatedItem;
+    axios.put(`/stuff/${id}`, {id, title, link, description})
+      .then((res) => {
+        console.log(res)
+        setEditing(false)
+        setList(list.map(item => (item.stuff_id === id ? updatedItem: item)))
+        console.log(updatedItem)
+      })
+      .catch((err) => {
+        console.log('cant update item', err)
+      })
+    console.log(list);
   }
+
+  // const updateItem = (updatedItem, id) => {
+  //   setEditing(false)
+  //   setList(list.map(item => (item.id === id ? updatedItem: item)))
+  // }
 
 
   const removeItem = (title, id) => {
     axios.delete(`/stuff/${id}`, {id})
     .then((res) => {
-      console.log("---------HELLO-------");
       setList(list.filter((item) => item.title !== title));
-      console.log(list)
     })
     .catch((err) => {
       console.log('error deleting item', err)
