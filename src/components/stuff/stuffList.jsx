@@ -4,7 +4,7 @@ import './stuff.css';
 const StuffList = ({list, removeItem, toggle, isExpanded, editItem}) => {
   return (
     <div className="list-body">
-      <h1 className="stuff-list-title">Things To Do</h1>
+      <h1  className="stuff-list-title">Things To Do</h1>
       {list.map(function(item){
         return (
           <div key={item.title}>
@@ -25,12 +25,12 @@ const StuffList = ({list, removeItem, toggle, isExpanded, editItem}) => {
               <br/>
               <button 
                 className="list-btn" 
-                onClick={() => editItem(item)}>
+                onClick={() => editItem(item, item.stuff_id)}>
                 edit
               </button>
               <button 
                 className="list-btn"
-                onClick={() => removeItem(item.title)}>
+                onClick={() => removeItem(item.title, item.stuff_id)}>
                 remove
               </button>
             </div>
