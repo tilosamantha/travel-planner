@@ -15,7 +15,7 @@ class App extends React.Component {
           <h1 id="header">Eurotrip</h1>
           <div className="main">
             <Navbar />
-            <Stuff />
+            <Packing />
             {/* <Routes /> */}
           </div>
         </div>

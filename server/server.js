@@ -2,12 +2,22 @@ const path = require("path");
 const express = require("express");
 const app = express();
 const port = 3000;
+// const { apiRouter } = require('./api');
 
-const controllers = require('./db/controllers');
+const controllers = require('../db/controllers');
+const packControllers = require('./packing-controller');
 app.use(express.json());
 
 
-app.use('/', express.static(__dirname + '/public'));
+// require('./api/packing-list')(app);
+
+// // app.use('/api', apiRouter);
+// app.use('/api/packing-list', pack)
+
+
+
+// app.use('/', express.static(__dirname + '/public'));
+app.use(express.static('public'))
 
 app.post(('/stuff'), (req, res) => {
   const { title, link, description } = req.body;
@@ -58,8 +68,25 @@ app.delete('/stuff/:id', (req, res) => {
 })
 
 
+//packpost
+app.post(('/what-to-pack'), (req, res) => {
+  const { name, quantity } = req.body;
+  packControllers.postPack(name, quantity)
+  .then((result) => {
+    res.json(result)
+  })
+  .catch((err) => {
+    console.log( 'error posting item to pack', err);
+    res.sendStatus(400);
+  })
+})
+
+//packget
+//packupdate
+//packdelete
+
 app.get('*', (req, res) => {
-  res.sendFile(Path.join(__dirname, '../public/index.html'));
+  res.sendFile(path.join(__dirname, '../public/index.html'));
 });
 
 app.listen(port, () => {

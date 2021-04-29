@@ -1,3 +1,4 @@
+import axios from 'axios';
 import React from 'react';
 import './packing.css';
 
@@ -13,6 +14,8 @@ function PackingForm({name, quantity, packingList, setPackingList, onNameChange,
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    const newItem = {name: name, quantity: quantity};
+    
     if (!isNaN(name)) {
       setErrorMessage("Please enter a valid item")
     }
@@ -20,11 +23,17 @@ function PackingForm({name, quantity, packingList, setPackingList, onNameChange,
       setErrorMessage("Please enter a number value")
     } 
     else {
-      const newItem = {name: name, quantity: quantity};
-      setPackingList(packingList => [...packingList, newItem]);
-      setName("");
-      setQuantity("");
-      setErrorMessage("");
+      axios.post('/what-to-pack', {name, quantity})
+        .then((res) => {
+          console.log(res);
+          setPackingList(packingList => [...packingList, newItem]);
+          setName("");
+          setQuantity("");
+          setErrorMessage("");
+        })
+        .catch((err) => {
+          console.log('post error', err)
+        })
   }}
 
   return (
